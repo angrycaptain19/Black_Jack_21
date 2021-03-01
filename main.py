@@ -30,13 +30,13 @@ class Main:
         self.status_label = Label(self.ma1n)  # Создаём Label, где будет отображаться статус игры (победа/проигрыш)
         self.dealer_score_label = IntVar()  # Переменная Integer типа для очков дилера
         self.dealer_label = Label(self.ma1n, textvariable=self.dealer_score_label, bg='#3b3a38', fg='#FFFFFF')  # Label для очков дилера
-        self.dealer_card_frame = Frame(self.ma1n, bg='#FFFFFF')  # Рамка для карт дилера
+        self.dealer_card_frame = Frame(self.ma1n)  # Рамка для карт дилера
         self.player_score_label = IntVar()  # Переменная Integer типа для очков игрока
         self.player_label = Label(self.ma1n, textvariable=self.player_score_label, bg='#3b3a38', fg='#FFFFFF')  # Label для очков игрока
-        self.player_card_frame = Frame(self.ma1n, bg='#FFFFFF')  # Рамка для карт игрока
-        self.button_deal = Button(self.ma1n, image=self.deal_image, relief=FLAT, border='0', command=self.deal)  # Кнопка "Начать"
-        self.button_hit = Button(self.ma1n, image=self.hit_image, relief=FLAT, border='0', command=self.hit)  # Кнопка "Взять"
-        self.button_stand = Button(self.ma1n, image=self.stand_image, relief=FLAT, border='0', command=self.stand)  # Кнопка "Оставить"
+        self.player_card_frame = Frame(self.ma1n)  # Рамка для карт игрока
+        self.button_deal = Button(self.ma1n, image=self.deal_image, relief=FLAT, border='0', command=self.deal, bg='#552e41', activebackground='#552e41')  # Кнопка "Начать"
+        self.button_hit = Button(self.ma1n, image=self.hit_image, relief=FLAT, border='0', command=self.hit, bg='#552e41', activebackground='#552e41')  # Кнопка "Взять"
+        self.button_stand = Button(self.ma1n, image=self.stand_image, relief=FLAT, border='0', command=self.stand, bg='#552e41', activebackground='#552e41')  # Кнопка "Оставить"
 
         self.background_label.place(x=0, y=0, relwidth=1, relheight=1)  # Выставляем в окне Label с фоном
         self.dealer_label.place(x=115, y=88, width=30, height=12)  # Выставляем счётчик очков дилера
@@ -63,7 +63,8 @@ class Main:
     def deal_card(self, frame):
         next_card = self.deck.pop(0)  # Карта достаётся из колоды и удаляется оттуда. (0 - карту взяли с верха колоды)
         self.deck.append(next_card)  # В колоду добавляется эта выпавшая карта
-        Label(frame, image=next_card[1], relief='flat', bg='#FFFFFF').pack(side=LEFT)  # Label с картой добавляется в рамку
+        frame.config(bg='#552e41')
+        Label(frame, image=next_card[1], relief='flat', bg='#552e41').pack(side=LEFT, padx=1)  # Label с картой добавляется в рамку
         return next_card  # Результат программы - кортеж с весом карты и картинкой карты
 
     # Подсчёт карт в 'руке'.
